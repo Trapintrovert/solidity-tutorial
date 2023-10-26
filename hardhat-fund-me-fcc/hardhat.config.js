@@ -1,4 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox")
+require("hardhat-deploy")
+require("dotenv").config()
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -16,13 +18,21 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             chainId: 11155111,
         },
-        localhost: {
-            url: "http://127.0.0.1:8545/",
-            // accounts: thanks hardhat
+        hardhat: {
             chainId: 31337,
         },
     },
-    solidity: "0.8.19",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.7",
+            },
+            {
+                version: "0.6.6",
+            },
+        ],
+    },
+
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
     },
@@ -32,10 +42,14 @@ module.exports = {
         noColors: true,
         currency: "USD",
         coinmarketcap: COINMARKETCAP_API_KEY,
-        token: "MATIC",
+        // token: "MATIC",
     },
-}
-
-module.exports = {
-    solidity: "0.8.19",
+    nameAccounts: {
+        deployer: {
+            default: 0,
+        },
+        users: {
+            default: 1,
+        },
+    },
 }
